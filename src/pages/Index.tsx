@@ -92,18 +92,24 @@ const Index = () => {
         </div>
         <p className="text-gray-600">Выберите альбом для просмотра</p>
       </header>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {albums.map((album) => (
           <Link to={`/album/${album.id}`} key={album.id}>
             <Card className="overflow-hidden h-full hover:shadow-lg transition-shadow duration-300 relative">
-              <div className="p-5 flex flex-col h-full">
-                <div className="aspect-video bg-gray-200 rounded-md mb-4 overflow-hidden">
-                  <img 
-                    src={`https://source.unsplash.com/random/400x300?sig=${album.id}`} 
-                    alt={album.title}
-                    className="w-full h-full object-cover"
-                  />
+              <div className="p-4 flex flex-col h-full">
+                <div className="aspect-video bg-gray-200 rounded-md mb-3 overflow-hidden">
+                  {album.count > 0 ? (
+                    <img 
+                      src={`https://source.unsplash.com/random/400x300?sig=${album.id}`} 
+                      alt={album.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                      <Icon name="Camera" size={32} className="text-gray-400" />
+                    </div>
+                  )}
                   <Button 
                     variant="destructive" 
                     size="icon"
@@ -117,7 +123,7 @@ const Index = () => {
                 {editingId === album.id ? (
                   <input
                     type="text"
-                    className="text-xl font-semibold mb-2 border border-gray-300 rounded p-1"
+                    className="text-lg font-semibold mb-2 border border-gray-300 rounded p-1"
                     value={editTitle}
                     onChange={(e) => setEditTitle(e.target.value)}
                     onBlur={saveEdit}
@@ -126,7 +132,7 @@ const Index = () => {
                   />
                 ) : (
                   <h2 
-                    className="text-xl font-semibold mb-2 cursor-pointer"
+                    className="text-lg font-semibold mb-2 cursor-pointer"
                     onDoubleClick={(e) => startEdit(album, e)}
                   >
                     {album.title}
@@ -134,7 +140,7 @@ const Index = () => {
                 )}
                 
                 <div className="flex items-center mt-auto text-gray-500">
-                  <Icon name="Image" className="mr-2" size={16} />
+                  <Icon name="Image" className="mr-2" size={14} />
                   <span>{album.count} фото</span>
                 </div>
               </div>
@@ -146,14 +152,15 @@ const Index = () => {
           className="overflow-hidden h-full hover:shadow-lg transition-shadow duration-300 border-dashed border-2 flex items-center justify-center cursor-pointer"
           onClick={addAlbum}
         >
-          <div className="p-5 flex flex-col h-full items-center justify-center w-full">
-            <div className="rounded-full bg-gray-100 p-4 mb-4">
-              <Icon name="Plus" size={32} className="text-gray-500" />
+          <div className="p-4 flex flex-col h-full items-center justify-center w-full">
+            <div className="rounded-full bg-gray-100 p-3 mb-3">
+              <Icon name="Plus" size={24} className="text-gray-500" />
             </div>
             <p className="text-gray-500 font-medium">Добавить альбом</p>
           </div>
         </Card>
       </div>
+
     </div>
   );
 };

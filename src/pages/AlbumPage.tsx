@@ -7,9 +7,15 @@ import { Separator } from '@/components/ui/separator';
 import Icon from '@/components/ui/icon';
 
 interface Photo {
+
+interface Photo {
   id: number;
   url: string;
   title: string;
+  file?: File;
+  originalName?: string;
+  width?: number;
+  height?: number;
 }
 
 interface Album {
