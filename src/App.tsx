@@ -8,9 +8,8 @@ import Index from "./pages/Index";
 import AlbumPage from "./pages/AlbumPage";
 import NotFound from "./pages/NotFound";
 
-import NotFound from "./pages/NotFound";
-
 const queryClient = new QueryClient();
+
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
